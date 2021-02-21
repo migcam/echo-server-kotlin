@@ -1,22 +1,22 @@
 import java.io.*
 import java.net.*
 
-
 fun main(){
 
     val echoSocket = Socket("localhost",8080)
 
-    PrintWritter out = PrintWritter(echoSocket.getOutPutStream(),true)
-    InputStreamReader input = InputStreamReader(getInPutStream(echoSocket.getOutPutStream()))
-    BufferedReader In = BufferedReader(input)
+    val Out = PrintWriter(echoSocket.getOutputStream(),true)
+    val input = InputStreamReader(echoSocket.getInputStream())
+    val In = BufferedReader(input)
 
-    InputStreamReader systemIn = InputStreamReader(System.`in`)
-    BufferedReader stdIn = BufferedReader(systemIn)
+    val systemIn = InputStreamReader(System.`in`)
+    val stdIn = BufferedReader(systemIn)
 
-    String userInput = stdIn.readLine();
+    var userInput = stdIn.readLine()
     while(userInput != null){
-        System.out.println(userInput)
-        System.out.println("echo: " + In.readLine());
+        Out.println(userInput)
+        System.out.println(In.readLine());
+        userInput = stdIn.readLine()
     }
 
 }

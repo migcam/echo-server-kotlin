@@ -6,12 +6,15 @@ fun main(){
     val serverSocket = ServerSocket(8080)
     val clientSocket =  serverSocket.accept();
 
-    val out = PrintWritter(clientSocket.getOutPutStream(), true);
-    val In = BufferedReader(clientSocket.getInPutStream())
+    var Out = PrintWriter(clientSocket.getOutputStream(), true)
+    val inputstream = InputStreamReader(clientSocket.getInputStream())
+    val In = BufferedReader(inputstream)
 
-    string inputline = in.readLine()
+    var inputline = ""
     while(inputline!= null){
-        println(inputline)
-        inputline = in.readLine()
+        inputline = In.readLine()
+        Out.println("echo: " + inputline)
     }
+
+
 }
